@@ -1,4 +1,4 @@
-package com.websocket.config;
+package com.dognessnetwork.websocket.config;
 
 import java.io.IOException;
 

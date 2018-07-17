@@ -1,12 +1,12 @@
-package com.websocket.config;
+package com.dognessnetwork.websocket.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import com.websocket.socket.MyHandshakeInterceptor;
-import com.websocket.socket.MyWebSocketHandler;
+import com.dognessnetwork.websocket.socket.MyHandshakeInterceptor;
+import com.dognessnetwork.websocket.socket.MyWebSocketHandler;
 
 @Configuration
 @EnableWebSocket

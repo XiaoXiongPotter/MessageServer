@@ -1,4 +1,4 @@
-package com.websocket.socket;
+package com.dognessnetwork.websocket.socket;
 
 import java.net.InetAddress;
 import java.util.IdentityHashMap;

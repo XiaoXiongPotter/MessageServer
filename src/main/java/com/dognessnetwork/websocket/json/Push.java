@@ -1,4 +1,4 @@
-package com.websocket.json;
+package com.dognessnetwork.websocket.json;
 
 import java.io.IOException;
 import java.util.Map;
@@ -19,7 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import com.websocket.socket.MyWebSocketHandler;
+import com.dognessnetwork.websocket.socket.MyWebSocketHandler;
 
 @RestController
 public class Push {
