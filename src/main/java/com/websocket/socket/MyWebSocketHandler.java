@@ -45,9 +45,14 @@ public class MyWebSocketHandler implements WebSocketHandler {
     	JSONObject json = JSONObject.parseObject(message);
     	String sessionId =json.getString("sessionId");
     	logger.info("sessionId:"+sessionId);
-    	users.put(sessionId,webSocketSession);
+    	//users.put(sessionId,webSocketSession);
+    	put(sessionId,webSocketSession);
     	webSocketSession.sendMessage(new TextMessage("链接成功"));
     	//sendMessageToUser(id,new TextMessage(webSocketMessage.getPayload() + ""));
+    }
+    
+    private static synchronized void put(String sessionId,WebSocketSession webSocketSession){
+    	users.put(sessionId,webSocketSession);
     }
 
     @Override
