@@ -14,7 +14,7 @@
   <version>1.0.0.BUILD-SNAPSHOT</version>
   <name>MessageServer</name>
 
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <properties>
     <roo.version>2.0.0.RC2</roo.version>
@@ -133,7 +133,21 @@
 		    <version>1.2.40</version>
 		</dependency>
 
-		
+		<dependency>      <groupId>org.springframework.boot</groupId>        <artifactId>spring-boot-starter-web</artifactId>          
+			<exclusions>
+				<exclusion>			<groupId>org.springframework.boot</groupId>		<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-tomcat</artifactId>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-velocity</artifactId>
+	</dependency>
   </dependencies>
 
   <build>

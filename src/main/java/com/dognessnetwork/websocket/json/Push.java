@@ -19,6 +19,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import com.dognessnetwork.websocket.socket.MyWebSocketHandler;
 
 @RestController
@@ -39,20 +42,22 @@ public class Push {
 	@PostMapping("/pushMessageToUser")
 	@ResponseBody
 	public String pushMessageToUser(@RequestParam("json")String json){
-		HttpSession session = getRequest().getSession();
-		//获取sessionId
-		String sessionId = (String) session.getAttribute("");
+		JSONObject js = JSON.parseObject(json);
+		String imei = js.getString("imei");
 		Map<String, WebSocketSession> map = MyWebSocketHandler.users;
 			for(Entry<String, WebSocketSession> entry : map.entrySet()){
 				logger.info("key:"+entry.getKey());
 				logger.info("value:"+entry.getValue());
-				if(entry.getKey().equals(sessionId)){
+				logger.info("isOpen:"+entry.getValue().isOpen());
+				if(entry.getKey().equals(imei) && entry.getValue().isOpen()){
 					try {
 						entry.getValue().sendMessage(new TextMessage(json));
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}else{
+					logger.info("pushMessageToUser:链接已经关闭");
 				}
 			}
 		
@@ -67,9 +72,10 @@ public class Push {
 	@PostMapping("/pushMessageToAll")
 	@ResponseBody
 	public String pushMessageToAll(@RequestParam("json")String json){
-		HttpSession session = getRequest().getSession();
+		
+		String req = getRequest().getHeader("sessionId");
 		//获取sessionId
-		String sessionId = (String) session.getAttribute("");
+		//String sessionId = (String) session.getAttribute("");
 		Map<String, WebSocketSession> map = MyWebSocketHandler.users;
 			for(Entry<String, WebSocketSession> entry : map.entrySet()){
 				logger.info("key:"+entry.getKey());
